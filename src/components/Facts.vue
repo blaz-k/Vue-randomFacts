@@ -1,15 +1,36 @@
 <template>
   <div>
-    <div v-bind:facts="facts">
-      <h3>random facts from facts: {{ facts }}</h3>
+    <div>
+      <button @click="getRandom">Load rendom fact</button>
+      <div v-bind:key="facts.id">
+        <p>{{ facts.id }} {{ facts.text }}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Facts",
-  props: ["facts"],
+  data() {
+    return {
+      facts: [],
+    };
+  },
+  methods: {
+    getRandom() {
+      axios
+        .get("https://uselessfacts.jsph.pl/random.json?language=en")
+        .then((response) => {
+          console.log(response.data);
+          this.posts = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 
