@@ -2,7 +2,7 @@
   <div>
     <div>
       <button @click="getRandom">Load random fact</button>
-      <div v-bind:key="facts.id">
+      <div>
         <p>{{ facts.text }}</p>
       </div>
     </div>
