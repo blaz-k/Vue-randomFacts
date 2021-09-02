@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <Facts v-bind:facts="facts" />
+    <h1>Random facts</h1>
+    <button>Submit</button>
+    <MyButton text="clicked" />
+    <Facts />
+
+    <MyButton text="drugi click" />
   </div>
 </template>
 
 <script>
 import Facts from "./components/Facts";
+import MyButton from "./components/MyButton";
 import axios from "axios";
 
 export default {
   name: "app",
   components: {
     Facts,
+    MyButton,
   },
-  data() {
+  data() { 
     return {
       facts: [],
     };
   },
+
   methods: {
     created() {
       axios
         .get("https://uselessfacts.jsph.pl/random.json?language=en")
-        .then((res) => (this.facts = res.data))
+        .then((response) => (this.facts = response.data))
         .catch((err) => console.log(err));
     },
   },
