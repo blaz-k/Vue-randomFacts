@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <button @click="getRandom">Load rendom fact</button>
+      <button @click="getRandom">Load random fact</button>
       <div v-bind:key="facts.id">
-        <p>{{ facts.id }} {{ facts.text }}</p>
+        <p>{{ facts.text }}</p>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
         .get("https://uselessfacts.jsph.pl/random.json?language=en")
         .then((response) => {
           console.log(response.data);
-          this.posts = response.data;
+          this.facts = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -35,4 +35,10 @@ export default {
 </script>
 
 <style scoped>
+button {
+  padding: 10px;
+  background-color: yellowgreen;
+  border-radius: 10%;
+  margin-bottom: 20px;
+}
 </style>
