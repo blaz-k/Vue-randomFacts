@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div>
+    <div class="smthNew">
       <button @click="getRandom">Load random fact</button>
-      <div>
-        <p>{{ facts.text }}</p>
-      </div>
+
+      <p>{{ fact.text }}</p>
     </div>
   </div>
 </template>
@@ -13,9 +12,13 @@
 import axios from "axios";
 export default {
   name: "Facts",
+  created() {
+    this.getRandom();
+    console.log("created");
+  },
   data() {
     return {
-      facts: [],
+      fact: "click on the button",
     };
   },
   methods: {
@@ -24,7 +27,7 @@ export default {
         .get("https://uselessfacts.jsph.pl/random.json?language=en")
         .then((response) => {
           console.log(response.data);
-          this.facts = response.data;
+          this.fact = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -40,5 +43,13 @@ button {
   background-color: yellowgreen;
   border-radius: 10%;
   margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.smthNew {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>
